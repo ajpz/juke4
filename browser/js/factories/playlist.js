@@ -21,8 +21,21 @@ app.factory('PlaylistFactory', function($http) {
         });
     };
 
+    function fetchOne(id) {
+        return $http.get('/api/playlists/' + id.toString())
+        .then(res => res.data); 
+    } 
+
+    function addSong(playlistId, song) {
+        console.log('this is the song', song); 
+        return $http.post('/api/playlists/' + playlistId + '/songs', {song : song})
+            .then(res => res.data)
+    }
+
     return {
         create: create,
-        fetchAll : fetchAll
+        fetchAll : fetchAll,
+        fetchOne : fetchOne, 
+        addSong: addSong
     }
 });

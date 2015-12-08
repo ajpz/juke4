@@ -1,0 +1,50 @@
+<div>
+    <h3>{{ playlist.name }}</h3>
+
+    <div class="well">
+        <form class="form-horizontal" name="playlistForm" ng-submit="addSong(song)">
+            <fieldset>
+                <legend>Add to Playlist</legend>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Song</label>
+                    <div class="col-xs-10">
+                        <select ng-options="song.name for song in songs" class="form-control" type="text" ng-model="song" ng-required="true" name="song">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-10 col-xs-offset-2">
+                        <button type="submit" class="btn btn-success" ng-disabled="playlistForm.$invalid">Add Song</button>
+                        <div class="alert-warning alert" ng-show="playlistForm.$invalid && !playlistForm.$pristine">Please enter a song</div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <table class='table' ng-show="playlist.songs.length">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Artists</th>
+                <th>Genres</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="song in playlist.songs" ng-class="{active: isCurrent(song)}">
+                <td>
+                    <button ng-hide="isCurrent(song)" ng-click="start(song)" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-play"></span>
+                    </button>
+                </td>
+                <td>{{ song.name }}</td>
+                <td><span ng-repeat="artist in song.artists">{{ artist.name }} </span></td>
+                <td>{{ song.genres.join(', ') }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <small ng-hide="playlist.songs.length">No songs.</small>
+    <hr>
+</div>

@@ -57,7 +57,9 @@ router.delete('/:playlistId', function(req, res, next) {
 router.get('/:playlistId/songs', (req, res) => res.json(req.playlist.songs) )
 
 router.post('/:playlistId/songs', function(req, res, next) {
+  console.log('in router, song is ', req.body.song); 
   req.playlist.songs.addToSet(req.body.song)
+  console.log('got here')
   req.playlist.save()
     .then( () => mongoose.model('Song').findById(req.body.song._id || req.body.song).populate('artists') )
     .then( (song) => res.status(201).json(song) )
