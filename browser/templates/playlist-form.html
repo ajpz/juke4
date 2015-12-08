@@ -11,11 +11,12 @@
             <div class="form-group">
                 <div class="col-xs-10 col-xs-offset-2">
                     <button type="submit" class="btn btn-success" ng-disabled="playlistForm.$invalid">Create Playlist</button>
-                    <div class="alert-warning alert" ng-show="playlistForm.$invalid && !playlistForm.$pristine">Please enter a title</div>
+                </div>
+                <div ng-messages="playlistForm.title.$error" role="alert">
+                    <div ng-message="required && $dirty">You must enter a playlist name</div>
+                    <div ng-message="maxlength">Title must be shorter than 16 characters</div>
                 </div>
             </div>
         </fieldset>
     </form>
-    <pre>{{ playlist | json }}
-    {{ playlistForm | json }}</pre>
 </div>

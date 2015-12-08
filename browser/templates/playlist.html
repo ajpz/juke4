@@ -42,6 +42,7 @@
                 <td>{{ song.name }}</td>
                 <td><span ng-repeat="artist in song.artists">{{ artist.name }} </span></td>
                 <td>{{ song.genres.join(', ') }}</td>
+                <td><button class="btn btn-xs btn-warning" ng-click="removeSong(song)"><span class="glyphicon glyphicon-remove"></span></button></td>
             </tr>
         </tbody>
     </table>

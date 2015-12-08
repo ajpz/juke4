@@ -32,11 +32,15 @@ app
 		PlaylistFactory.addSong(playlist._id, song)
 			.then(function(song) {
 				$scope.playlist.songs.push(song); 
-				console.log($scope.playlistForm); 
-		        // $scope.playlist.name = "";
-		        $scope.playlistForm.$setPristine(true);
+		        $scope.song = 'Reset selection to blank'; 
 			})
 		
+	}
+
+	$scope.removeSong = function(song) {
+		var idx = $scope.playlist.songs.indexOf(song); 
+		$scope.playlist.songs.splice(idx, 1); 
+		PlaylistFactory.removeSong(playlist._id, song); 
 	}
 
 })

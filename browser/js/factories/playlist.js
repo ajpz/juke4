@@ -27,15 +27,20 @@ app.factory('PlaylistFactory', function($http) {
     } 
 
     function addSong(playlistId, song) {
-        console.log('this is the song', song); 
         return $http.post('/api/playlists/' + playlistId + '/songs', {song : song})
             .then(res => res.data)
+    }
+
+    function removeSong(playlistId, song) {
+        return $http.delete('/api/playlists/' + playlistId + '/songs/' + song._id)
+                    .then(res => res.data)
     }
 
     return {
         create: create,
         fetchAll : fetchAll,
         fetchOne : fetchOne, 
-        addSong: addSong
+        addSong: addSong, 
+        removeSong: removeSong
     }
 });
